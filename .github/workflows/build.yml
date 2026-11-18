@@ -17,22 +17,22 @@ jobs:
       with:
         node-version: 18
 
-    - name: Install Dependencies
-      run: npm install
-
-    - name: Auto-Create Config & Web Directory
+    - name: Prepare Web Directory & Config
       run: |
-        # Membuat folder www dan memindahkan index.html ke dalamnya
+        # 1. Buat folder www dan pindahkan index.html ke dalamnya
         mkdir www
         cp index.html www/
 
-        # Membuat file capacitor.config.json secara otomatis lewat terminal server
+        # 2. Buat file capacitor.config.json secara otomatis
         echo '{
           "appId": "com.example.webapp",
           "appName": "WebToApkKu",
           "webDir": "www",
           "bundledWebRuntime": false
         }' > capacitor.config.json
+
+    - name: Install Dependencies
+      run: npm install
 
     - name: Add Android Platform & Sync
       run: |
